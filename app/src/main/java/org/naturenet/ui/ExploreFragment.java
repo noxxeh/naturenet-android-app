@@ -101,8 +101,7 @@ public class ExploreFragment extends Fragment implements GoogleApiClient.Connect
     Observation previewSelectedObservation;
     private Map<Marker, PreviewInfo> allMarkersMap = new HashMap<Marker, PreviewInfo>();
 
-    public ExploreFragment() {
-    }
+    public ExploreFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -151,8 +150,7 @@ public class ExploreFragment extends Fragment implements GoogleApiClient.Connect
                         final Observation observation = main.observations.get(i);
                         Marker marker = googleMap.addMarker(new MarkerOptions()
                                 .position(new LatLng(observation.getL().get(LATITUDE), observation.getL().get(LONGITUDE)))
-                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-                                .title(OBSERVATION));
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
                         allMarkersMap.put(marker, main.previews.get(observation));
                     }
                     googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -172,7 +170,6 @@ public class ExploreFragment extends Fragment implements GoogleApiClient.Connect
                                     public void onSuccess() {
                                         preview_observer_avatar.setImageBitmap(GetBitmapClippedCircle(((BitmapDrawable) preview_observer_avatar.getDrawable()).getBitmap()));
                                     }
-
                                     @Override
                                     public void onError() {
                                         preview_observer_avatar.setImageBitmap(GetBitmapClippedCircle(BitmapFactory.decodeResource(main.getResources(), R.drawable.default_avatar)));
@@ -224,12 +221,10 @@ public class ExploreFragment extends Fragment implements GoogleApiClient.Connect
     }
 
     @Override
-    public void onConnectionSuspended(int i) {
-    }
+    public void onConnectionSuspended(int i) {}
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-    }
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {}
 
     @Override
     public void onLocationChanged(Location location) {
@@ -452,6 +447,7 @@ public class ExploreFragment extends Fragment implements GoogleApiClient.Connect
 //            return null;
 //        return mediaFile;
 //    }
+
     private class ImageAdapter extends BaseAdapter {
         private Context mContext;
 

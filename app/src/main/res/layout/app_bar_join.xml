@@ -28,7 +28,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_gravity="center_vertical"
                 android:layout_centerVertical="true"
-                android:layout_margin="@dimen/join_margin"
+                android:padding="@dimen/join_margin"
                 android:gravity="center"
                 android:clickable="true"
                 style="@style/join_back"/>

@@ -75,12 +75,14 @@ import java.util.UUID;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, FirebaseAuth.AuthStateListener {
+
     final static int REQUEST_CODE_JOIN = 1;
     final static int REQUEST_CODE_LOGIN = 2;
     final static int REQUEST_CODE_ADD_OBSERVATION = 3;
     final static int REQUEST_CODE_PROJECT_ACTIVITY = 4;
     final static int REQUEST_CODE_OBSERVATION_ACTIVITY = 5;
-    static int NUM_OF_OBSERVATIONS = 8;
+    final static int NUM_OF_OBSERVATIONS = 8;
+
     static String FRAGMENT_TAG_LAUNCH = "launch_fragment";
     static String FRAGMENT_TAG_EXPLORE = "explore_fragment";
     static String FRAGMENT_TAG_PROJECTS = "projects_fragment";
@@ -132,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static String TRUE = "true";
     static String COMMENTS = "comments";
     static String LIKES = "likes";
+
     Observation selectedObservation, previewSelectedObservation;
     ObserverInfo selectedObserverInfo;
     List<Observation> observations;
@@ -246,6 +249,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .create().show();
         }
     }
+
     @Override
     public void onBackPressed() {
 //        if(getFragmentManager().findFragmentByTag(FRAGMENT_TAG_LAUNCH).isVisible()) {
@@ -265,6 +269,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else
             super.onBackPressed();
     }
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         if (haveNetworkConnection()) {
@@ -307,6 +312,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return true;
     }
+
     public void goToLaunchFragment() {
         toolbar_title.setText(R.string.launch_title);
         getFragmentManager().
@@ -315,6 +321,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 addToBackStack(null).
                 commit();
     }
+
     public void goToExploreFragment() {
         if (haveNetworkConnection()) {
             pd.setMessage(LOADING_OBSERVATIONS);
@@ -442,6 +449,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Toast.makeText(MainActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
         }
     }
+
     public void goToProjectsFragment() {
         toolbar_title.setText(R.string.projects_title);
         getFragmentManager().
@@ -450,6 +458,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 addToBackStack(null).
                 commit();
     }
+
     public void goToDesignIdeasFragment() {
         toolbar_title.setText(R.string.design_ideas_title_design_ideas);
         getFragmentManager().
@@ -458,6 +467,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 addToBackStack(null).
                 commit();
     }
+
     public void goToCommunitiesFragment() {
         toolbar_title.setText(R.string.communities_title);
         getFragmentManager().
@@ -466,6 +476,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 addToBackStack(null).
                 commit();
     }
+
     public void logout() {
         Toast.makeText(this, "You have been logged out.", Toast.LENGTH_SHORT).show();
         signed_user = null;
@@ -480,9 +491,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         display_name.setVisibility(View.GONE);
         affiliation.setVisibility(View.GONE);
     }
+
     public void closeCurrent() {
         getFragmentManager().popBackStack();
     }
+
     public void goToJoinActivity() {
         ids = new ArrayList<String>();
         names = new ArrayList<String>();
@@ -510,10 +523,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
+
     public void goToLoginActivity() {
         Intent login = new Intent(this, LoginActivity.class);
         startActivityForResult(login, REQUEST_CODE_LOGIN);
     }
+
     public void goToAddObservationActivity() {
         Intent addObservation = new Intent(this, AddObservationActivity.class);
         addObservation.putExtra(OBSERVATION_PATH, observationPath);
@@ -524,6 +539,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivityForResult(addObservation, REQUEST_CODE_ADD_OBSERVATION);
         overridePendingTransition(R.anim.slide_up, R.anim.stay);
     }
+
     public void goToProjectActivity(Project p) {
         Intent project = new Intent(this, ProjectActivity.class);
         project.putExtra(PROJECT, p);
@@ -531,6 +547,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivityForResult(project, REQUEST_CODE_PROJECT_ACTIVITY);
         overridePendingTransition(R.anim.slide_up, R.anim.stay);
     }
+
     public void goToObservationActivity() {
         Intent observation = new Intent(this, ObservationActivity.class);
         observation.putExtra(SIGNED_USER, signed_user);
@@ -540,6 +557,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivityForResult(observation, REQUEST_CODE_OBSERVATION_ACTIVITY);
         overridePendingTransition(R.anim.slide_up, R.anim.stay);
     }
+
     public List<String> getAllShownImagesPath() {
         Uri uri;
         Cursor cursor;
@@ -554,6 +572,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         cursor.close();
         return listOfAllImages;
     }
+
     public void uploadObservation() {
         pd.setMessage(SUBMITTING);
         pd.setCancelable(false);
@@ -600,6 +619,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
+
     public Bitmap decodeURI(String filePath) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
@@ -702,6 +722,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
     }
+
     public void getSignedUser() {
         mFirebase.child(USERS).child(mFirebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -786,4 +807,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             goToLaunchFragment();
         }
     }
+
 }
