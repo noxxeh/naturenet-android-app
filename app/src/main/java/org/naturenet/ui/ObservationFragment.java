@@ -1,6 +1,7 @@
 package org.naturenet.ui;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -222,6 +223,19 @@ public class ObservationFragment extends Fragment {
                         Toast.makeText(o, "Please login to comment.", Toast.LENGTH_SHORT).show();
                     }
                 }
+            }
+        });
+
+        observation_image.setOnClickListener(new View.OnClickListener() {//This adds an onclicklistener to the actual image inside the observation
+            @Override
+            public void onClick(View view) {
+                //when the observation is clicked, it goes to fullscreen mode for that picture
+                Fragment newFragment = new ObservationFullscreenFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, newFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
             }
         });
     }
