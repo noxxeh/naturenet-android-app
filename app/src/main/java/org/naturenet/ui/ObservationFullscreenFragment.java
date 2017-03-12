@@ -7,6 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.google.common.base.Strings;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import org.naturenet.R;
 import org.naturenet.data.model.Comment;
@@ -15,13 +23,16 @@ import org.naturenet.data.model.Site;
 import org.naturenet.data.model.Users;
 import org.naturenet.util.NatureNetUtils;
 
-public class ObservationFullscreenFragment extends Fragment {
+import timber.log.Timber;
+
+public class ObservationFullscreenFragment extends Fragment{
 
     public static final String FRAGMENT_TAG = "observation_fragment_fullscreen";
     private static final String ARG_OBSERVATION = "ARG_OBSERVATION";
 
     ObservationActivity o;
     ImageView observation_image;
+    private String mObservationId;
 
     public static ObservationFullscreenFragment newInstance(String observationID) {
         ObservationFullscreenFragment full = new ObservationFullscreenFragment();
@@ -41,5 +52,8 @@ public class ObservationFullscreenFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         observation_image = (ImageView) view.findViewById(R.id.selected_observation_icon);
+
     }
+
+
 }

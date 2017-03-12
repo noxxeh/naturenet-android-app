@@ -145,6 +145,7 @@ public class ObservationFragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
                 Timber.w(databaseError.toException(), "Unable to read data for observation %s", mObservationId);
             }
+
         });
 
         if (o.like != null) {
@@ -230,6 +231,8 @@ public class ObservationFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //when the observation is clicked, it goes to fullscreen mode for that picture
+                //View listView = getActivity().findViewById(R.id.selected_observation_icon);
+
                 Fragment newFragment = new ObservationFullscreenFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment_container, newFragment);
