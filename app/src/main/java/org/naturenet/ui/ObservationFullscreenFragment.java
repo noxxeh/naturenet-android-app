@@ -55,9 +55,40 @@ public class ObservationFullscreenFragment extends Fragment{
 
         observation_image = (ImageView) view.findViewById(R.id.selected_observation_icon);
         //Picasso.with(context).load("http://i.imgur.com/B7ldAEW.jpg").into(observation_image);
-        //Picasso.with(getActivity()).load("http://i.imgur.com/B7ldAEW.jpg").placeholder(R.drawable.no_image)
-               // .error(R.drawable.no_image).fit().centerInside().into(observation_image);
 
+    }
+
+    @Override
+    public void onActivityCreated (Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        //Picasso.with(getActivity()).load("http://i.imgur.com/B7ldAEW.jpg").placeholder(R.drawable.no_image)
+                //.error(R.drawable.no_image).fit().centerInside().into(observation_image);
+
+        if (getArguments() == null || getArguments().getString(ARG_OBSERVATION) == null) {
+            Timber.e(new IllegalArgumentException(), "Tried to load ObservationFragment without an Observation argument");
+            Toast.makeText(getActivity(), "No observation to display", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        o = (ObservationActivity) getActivity();
+        mObservationId = getArguments().getString(ARG_OBSERVATION);
+
+        FirebaseDatabase.getInstance().getReference(Observation.NODE_NAME).child(mObservationId).addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange (DataSnapshot dataSnapshot){
+                final Observation obs = dataSnapshot.getValue(Observation.class);
+
+                Picasso.with(getActivity()).load(Strings.emptyToNull(obs.data.image)).placeholder(R.drawable.no_image)
+                    .error(R.drawable.no_image).fit().centerInside().into(observation_image);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Timber.w(databaseError.toException(), "Unable to read data for observation %s", mObservationId);
+            }
+        });
     }
 
 
