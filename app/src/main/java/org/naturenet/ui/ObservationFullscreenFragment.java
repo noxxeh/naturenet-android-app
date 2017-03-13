@@ -1,6 +1,7 @@
 package org.naturenet.ui;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ public class ObservationFullscreenFragment extends Fragment{
     public static final String FRAGMENT_TAG = "observation_fragment_fullscreen";
     private static final String ARG_OBSERVATION = "ARG_OBSERVATION";
 
+
     ObservationActivity o;
     ImageView observation_image;
     private String mObservationId;
@@ -52,6 +54,9 @@ public class ObservationFullscreenFragment extends Fragment{
         super.onViewCreated(view, savedInstanceState);
 
         observation_image = (ImageView) view.findViewById(R.id.selected_observation_icon);
+        //Picasso.with(context).load("http://i.imgur.com/B7ldAEW.jpg").into(observation_image);
+        //Picasso.with(getActivity()).load("http://i.imgur.com/B7ldAEW.jpg").placeholder(R.drawable.no_image)
+               // .error(R.drawable.no_image).fit().centerInside().into(observation_image);
 
     }
 
