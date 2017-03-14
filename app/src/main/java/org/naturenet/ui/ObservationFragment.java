@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +44,9 @@ public class ObservationFragment extends Fragment {
     EditText comment;
     ListView lv_comments;
     private String mObservationId;
+
+    ViewGroup.LayoutParams params;
+    boolean isImageFitToScreen;
 
     public static ObservationFragment newInstance(String observationId) {
         ObservationFragment frag = new ObservationFragment();
@@ -232,6 +236,18 @@ public class ObservationFragment extends Fragment {
             public void onClick(View view) {
                 //when the observation is clicked, it goes to fullscreen mode for that picture
                 //View listView = getActivity().findViewById(R.id.selected_observation_icon);
+
+                //if(isImageFitToScreen) {
+                    //isImageFitToScreen=false;
+                    //observation_image.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
+                    //observation_image.setAdjustViewBounds(true);
+                    //observation_image.setLayoutParams(params);
+                //}else{
+                    //isImageFitToScreen=true;
+                    //o.getSupportActionBar().hide();
+                   // observation_image.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
+                    //observation_image.setScaleType(ImageView.ScaleType.FIT_XY);
+                //}
 
                 Fragment newFragment = new ObservationFullscreenFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
